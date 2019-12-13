@@ -8,4 +8,4 @@ Ce projet utilise Unity (version 2019.2.15f1) qui peut être téléchargé [ici]
 
 Une version executable du projet utilisable sans Unity peut être téléchargée dans l'onglet [releases](https://github.com/alexandrejanin/saisie/releases)
 
-Ce projet nécessite un ou plusieurs Leap Motion pour fonctionner.
+Ce projet nécessite un Leap Motion pour fonctionner, ainsi que le logiciel Leap Motion disponible [ici](https://www.leapmotion.com/setup/desktop/).
