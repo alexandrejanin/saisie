@@ -11,5 +11,7 @@ public class HandPositionManager : MonoBehaviour {
     public Transform RightPalm => IfActive(rightPalm);
     public Transform RightIndex => IfActive(rightIndex);
 
-    private static Transform IfActive(Transform t) => t.gameObject.activeInHierarchy ? t : null;
+    private static Transform IfActive(Transform t) {
+        return t.gameObject.activeInHierarchy ? t : null;
+    }
 }

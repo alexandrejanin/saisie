@@ -2,9 +2,8 @@
 using UnityEngine.UI;
 
 public class HandDistance : MonoBehaviour {
-    [SerializeField] private float maxDistance, minDistance;
-
     [SerializeField] private Image image;
+    [SerializeField] private float maxDistance, minDistance;
 
     private HandPositionManager handPositionManager;
 
