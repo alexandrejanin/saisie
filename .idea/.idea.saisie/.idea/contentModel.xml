@@ -532,8 +532,6 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Decoy.cs" t="Include" />
-          <e p="HandDistance.cs" t="Include" />
-          <e p="HandObjectDistance.cs" t="Include" />
           <e p="HandPositionManager.cs" t="Include" />
           <e p="HandSpawner.cs" t="Include" />
           <e p="HandText.cs" t="Include" />

@@ -2,18 +2,17 @@
 using UnityEngine.UI;
 
 public class ScreenColorManager : MonoBehaviour {
-    private Image image;
+    [SerializeField] private Image fullscreenImage, smallImage;
 
     public Color Color {
-        set => image.color = value;
-    }
-
-    private void Awake() {
-        image = GetComponent<Image>();
+        set {
+            fullscreenImage.color = value;
+            smallImage.color = value;
+        }
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.D))
-            image.enabled = !image.enabled;
+            fullscreenImage.enabled = !fullscreenImage.enabled;
     }
 }

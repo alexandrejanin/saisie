@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class NetworkHand : HandBehavior {
+    [SerializeField] private GameObject graphics;
     [SerializeField] private Color errorColor, offColor, onColor;
     [SerializeField] private float minDistance = 0.05f;
     [SerializeField] private float maxDistance = 0.1f;
@@ -17,6 +18,7 @@ public class NetworkHand : HandBehavior {
     protected override void NetworkStart() {
         base.NetworkStart();
         networkObject.UpdateInterval = 20;
+        graphics.SetActive(!networkObject.IsOwner);
     }
 
     private void Update() {
@@ -59,8 +61,6 @@ public class NetworkHand : HandBehavior {
             if (dist < shortestDistance)
                 shortestDistance = dist;
         }
-
-        Debug.Log(shortestDistance);
 
         var t = Mathf.InverseLerp(minDistance, maxDistance, shortestDistance);
         screenColorManager.Color = Color.Lerp(onColor, offColor, t);
