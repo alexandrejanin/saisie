@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Dev\Projects\saisie" t="IncludeRecursive">
+    <e p="C:\Users\killi\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\killi\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_saisie.-666921849.00" t="ExcludeRecursive" />
+    <e p="C:\Users\killi\Documents\Dev\LeapMotion\saisie" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -527,13 +529,17 @@
             <e p="Version.txt" t="Include" />
           </e>
         </e>
+        <e p="Logs" t="Include">
+          <e p="bmslog.txt" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="HandDistance.cs" t="Include" />
+          <e p="HandIndex.cs" t="Include" />
           <e p="HandObjectDistance.cs" t="Include" />
           <e p="HandPositionManager.cs" t="Include" />
+          <e p="HandSpawner.cs" t="Include" />
           <e p="HandText.cs" t="Include" />
           <e p="NetworkHand.cs" t="Include" />
-          <e p="NetworkTest.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
@@ -541,7 +547,5 @@
       <e p="saisie.sln" t="IncludeFlat" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="C:\Users\killi\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\killi\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_saisie.-1131084550.00" t="ExcludeRecursive" />
   </component>
 </project>

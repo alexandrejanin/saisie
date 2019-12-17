@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe5b082a785e7641bf1a62b930a3f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandNetworkObject: []
+  HandNetworkObject:
+  - {fileID: 2926519190297673547, guid: 876cdb397f3319b46b972f814a1c5457, type: 3}
   automaticScenes: 1
