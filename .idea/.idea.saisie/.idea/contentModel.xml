@@ -36,40 +36,15 @@
             <e p="SimpleJSONEditor.cs" t="Include" />
             <e p="ValidationResult.cs" t="Include" />
           </e>
-          <e p="Examples" t="Include">
-            <e p="Cube Forge" t="Include">
-              <e p="Scripts" t="Include">
-                <e p="CubeForgeGame.cs" t="Include" />
-                <e p="NetCam.cs" t="Include" />
-                <e p="Primitive.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Proximity" t="Include">
-              <e p="ExampleProximityPlayer.cs" t="Include" />
-              <e p="ExampleProximitySpawn.cs" t="Include" />
-            </e>
-          </e>
           <e p="Generated" t="Include">
             <e p="NetworkManager.cs" t="Include" />
             <e p="NetworkObjectFactory.cs" t="Include" />
             <e p="UserGenerated" t="Include">
-              <e p="ChatManagerBehavior.cs" t="Include" />
-              <e p="ChatManagerNetworkObject.cs" t="Include" />
-              <e p="CubeForgeGameBehavior.cs" t="Include" />
-              <e p="CubeForgeGameNetworkObject.cs" t="Include" />
-              <e p="ExampleProximityPlayerBehavior.cs" t="Include" />
-              <e p="ExampleProximityPlayerNetworkObject.cs" t="Include" />
-              <e p="NetworkCameraBehavior.cs" t="Include" />
-              <e p="NetworkCameraNetworkObject.cs" t="Include" />
-              <e p="TestBehavior.cs" t="Include" />
-              <e p="TestNetworkObject.cs" t="Include" />
+              <e p="HandBehavior.cs" t="Include" />
+              <e p="HandNetworkObject.cs" t="Include" />
             </e>
           </e>
           <e p="Modules" t="Include">
-            <e p="Chat" t="Include">
-              <e p="ChatMaker.cs" t="Include" />
-              <e p="ChatManager.cs" t="Include" />
-            </e>
             <e p="LobbySystem" t="Include">
               <e p="LobbyManager.cs" t="Include" />
               <e p="LobbyPlayer.cs" t="Include" />
@@ -557,6 +532,7 @@
           <e p="HandObjectDistance.cs" t="Include" />
           <e p="HandPositionManager.cs" t="Include" />
           <e p="HandText.cs" t="Include" />
+          <e p="NetworkHand.cs" t="Include" />
           <e p="NetworkTest.cs" t="Include" />
         </e>
       </e>

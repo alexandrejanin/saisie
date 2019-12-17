@@ -1,16 +1,35 @@
-﻿using UnityEngine;
-using UnityEngine.Networking;
+﻿using BeardedManStudios.Forge.Networking;
+using BeardedManStudios.Forge.Networking.Unity;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkTest : MonoBehaviour {
-    [SerializeField] private int port = 5678;
+    [SerializeField] private NetworkManager networkManagerPrefab;
+    [SerializeField] private ushort port = 15937;
 
-    private int channelId;
-    private ConnectionConfig config;
+    private NetworkManager networkManager;
 
-    private void Start() {
-        NetworkTransport.Init();
+    public void Host() {
+        var server = new UDPServer(2);
+        server.Connect("localhost", port);
 
-        config = new ConnectionConfig();
-        channelId = config.AddChannel(QosType.Unreliable);
+        networkManager = Instantiate(networkManagerPrefab);
+        networkManager.Initialize(server);
+        SceneManager.LoadScene(1);
+    }
+
+    public void Connect() {
+        NetWorker.localServerLocated += LocalServerLocated;
+        NetWorker.RefreshLocalUdpListings();
+    }
+
+    private void LocalServerLocated(NetWorker.BroadcastEndpoints endpoint, NetWorker sender) {
+        Debug.Log("Found endpoint: " + endpoint.Address + ":" + endpoint.Port);
+        var client = new UDPClient();
+        client.serverAccepted += server => MainThreadManager.Run(() => {
+            networkManager = Instantiate(networkManagerPrefab);
+            networkManager.Initialize(client);
+        });
+        client.Connect(endpoint.Address, endpoint.Port);
     }
 }

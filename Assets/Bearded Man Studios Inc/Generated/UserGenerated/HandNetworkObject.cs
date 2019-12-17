@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedInterpol("{\"inter\":[0.15]")]
-	public partial class NetworkCameraNetworkObject : NetworkObject
+	[GeneratedInterpol("{\"inter\":[0.25]")]
+	public partial class HandNetworkObject : NetworkObject
 	{
-		public const int IDENTITY = 4;
+		public const int IDENTITY = 1;
 
 		private byte[] _dirtyFields = new byte[1];
 
@@ -18,7 +18,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		[ForgeGeneratedField]
 		private Vector3 _position;
 		public event FieldEvent<Vector3> positionChanged;
-		public InterpolateVector3 positionInterpolation = new InterpolateVector3() { LerpT = 0.15f, Enabled = true };
+		public InterpolateVector3 positionInterpolation = new InterpolateVector3() { LerpT = 0.25f, Enabled = true };
 		public Vector3 position
 		{
 			get { return _position; }
@@ -132,9 +132,9 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		}
 
-		public NetworkCameraNetworkObject() : base() { Initialize(); }
-		public NetworkCameraNetworkObject(NetWorker networker, INetworkBehavior networkBehavior = null, int createCode = 0, byte[] metadata = null) : base(networker, networkBehavior, createCode, metadata) { Initialize(); }
-		public NetworkCameraNetworkObject(NetWorker networker, uint serverId, FrameStream frame) : base(networker, serverId, frame) { Initialize(); }
+		public HandNetworkObject() : base() { Initialize(); }
+		public HandNetworkObject(NetWorker networker, INetworkBehavior networkBehavior = null, int createCode = 0, byte[] metadata = null) : base(networker, networkBehavior, createCode, metadata) { Initialize(); }
+		public HandNetworkObject(NetWorker networker, uint serverId, FrameStream frame) : base(networker, serverId, frame) { Initialize(); }
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}
