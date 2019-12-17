@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7799219200968929038}
+  - component: {fileID: 2340000072360317942}
   - component: {fileID: 7799219200968929033}
   - component: {fileID: 7799219200968929032}
-  - component: {fileID: 7799219200968929035}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: StaticDecoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2340000072360317942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799219200968929034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bc8b451047dd64aa86e6bdd8ed9921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereCenter: {x: 0, y: 0, z: 0.3}
+  sphereRadius: 0.2
 --- !u!33 &7799219200968929033
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,16 +93,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7799219200968929035
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7799219200968929034}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

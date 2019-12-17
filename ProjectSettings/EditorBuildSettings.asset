@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MultiplayerMenu.unity
     guid: b445f119d3a553044b65a4fd86ed3023
   - enabled: 1
-    path: Assets/Scenes/HandObject.unity
+    path: Assets/Scenes/MainScene.unity
     guid: ae0ece5620cb16247b668d33eecc1fc9
   m_configObjects: {}

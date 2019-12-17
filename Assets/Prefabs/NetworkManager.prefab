@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HandNetworkObject:
-  - {fileID: 2926519190297673547, guid: 876cdb397f3319b46b972f814a1c5457, type: 3}
+  - {fileID: 8974775745871431599, guid: 68abfa0bf9810fd48ac9dc6fb772a0bb, type: 3}
   automaticScenes: 1
