@@ -3,6 +3,11 @@
 public class Decoy : MonoBehaviour {
     [SerializeField] private float minDistance = 0.05f;
     [SerializeField] private float maxDistance = 0.1f;
+    [SerializeField] private new Renderer renderer;
+
+    public Color Color {
+        set => renderer.material.color = value;
+    }
 
     private void Awake() {
         transform.localScale = Vector3.one * maxDistance;

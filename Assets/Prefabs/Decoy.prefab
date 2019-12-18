@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7799219200968929033}
   - component: {fileID: 7799219200968929032}
   m_Layer: 0
-  m_Name: StaticDecoy
+  m_Name: Decoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 0.05
   maxDistance: 0.1
+  renderer: {fileID: 7799219200968929032}
 --- !u!33 &7799219200968929033
 MeshFilter:
   m_ObjectHideFlags: 0

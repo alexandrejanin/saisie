@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3712608821f134ca9d20d981f19f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decoy: {fileID: 5268223890810221420}
   errorColor: {r: 0.6415094, g: 0, b: 0, a: 1}
   offColor: {r: 0, g: 0, b: 0, a: 1}
   onColor: {r: 1, g: 1, b: 1, a: 1}
@@ -57,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 7799219200968929034, guid: 586baeefeecc41f4f9b28b49eae1442f,
         type: 3}
       propertyPath: m_Name
-      value: StaticDecoy
+      value: Decoy
       objectReference: {fileID: 0}
     - target: {fileID: 7799219200968929038, guid: 586baeefeecc41f4f9b28b49eae1442f,
         type: 3}
@@ -137,3 +138,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6108641505068953578}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5268223890810221420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2151098438793534598, guid: 586baeefeecc41f4f9b28b49eae1442f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6108641505068953578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0797cce42e840546a466cd72ee406dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
