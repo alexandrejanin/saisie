@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Decoy : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class Decoy : MonoBehaviour {
+    [SerializeField] private float minDistance = 0.05f;
+    [SerializeField] private float maxDistance = 0.1f;
+
+    private void Awake() {
+        transform.localScale = Vector3.one * maxDistance;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public float GetLerpValue(Vector3 position) {
+        return Mathf.InverseLerp(maxDistance, minDistance, Vector3.Distance(transform.position, position));
     }
 }

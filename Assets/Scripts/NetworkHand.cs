@@ -1,11 +1,9 @@
-﻿using BeardedManStudios.Forge.Networking.Generated;
+﻿using System.Linq;
+using BeardedManStudios.Forge.Networking.Generated;
 using UnityEngine;
 
 public class NetworkHand : HandBehavior {
-    [SerializeField] private GameObject graphics;
     [SerializeField] private Color errorColor, offColor, onColor;
-    [SerializeField] private float minDistance = 0.05f;
-    [SerializeField] private float maxDistance = 0.1f;
 
     private HandPositionManager handPositionManager;
     private ScreenColorManager screenColorManager;
@@ -18,7 +16,8 @@ public class NetworkHand : HandBehavior {
     protected override void NetworkStart() {
         base.NetworkStart();
         networkObject.UpdateInterval = 20;
-        graphics.SetActive(!networkObject.IsOwner);
+        if (networkObject.IsOwner)
+            Destroy(transform.GetChild(0).gameObject);
     }
 
     private void Update() {
@@ -40,29 +39,10 @@ public class NetworkHand : HandBehavior {
         transform.position = index.position;
         networkObject.position = index.position;
 
-        var shortestDistance = Mathf.Infinity;
+        var maxColorValue = FindObjectsOfType<Decoy>()
+            .Select(decoy => decoy.GetLerpValue(index.position))
+            .Max();
 
-        foreach (var decoy in FindObjectsOfType<StaticDecoy>()) {
-            var dist = Vector3.Distance(index.position, decoy.transform.position);
-            if (dist < shortestDistance)
-                shortestDistance = dist;
-        }
-
-        foreach (var decoy in FindObjectsOfType<Decoy>()) {
-            var dist = Vector3.Distance(index.position, decoy.transform.position);
-            if (dist < shortestDistance)
-                shortestDistance = dist;
-        }
-
-        foreach (var hand in FindObjectsOfType<NetworkHand>()) {
-            if (hand == this)
-                continue;
-            var dist = Vector3.Distance(index.position, hand.transform.position);
-            if (dist < shortestDistance)
-                shortestDistance = dist;
-        }
-
-        var t = Mathf.InverseLerp(minDistance, maxDistance, shortestDistance);
-        screenColorManager.Color = Color.Lerp(onColor, offColor, t);
+        screenColorManager.Color = Color.Lerp(offColor, onColor, maxColorValue);
     }
 }

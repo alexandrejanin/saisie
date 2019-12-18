@@ -532,12 +532,12 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Decoy.cs" t="Include" />
+          <e p="DecoySpawner.cs" t="Include" />
           <e p="HandPositionManager.cs" t="Include" />
           <e p="HandSpawner.cs" t="Include" />
           <e p="HandText.cs" t="Include" />
           <e p="NetworkHand.cs" t="Include" />
           <e p="ScreenColorManager.cs" t="Include" />
-          <e p="StaticDecoy.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
