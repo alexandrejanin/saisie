@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BeardedManStudios.Forge.Networking.Generated;
+using BeardedManStudios.Forge.Networking.Unity;
 using UnityEngine;
 
 public class NetworkHand : HandBehavior {
@@ -19,10 +20,13 @@ public class NetworkHand : HandBehavior {
     protected override void NetworkStart() {
         base.NetworkStart();
         networkObject.UpdateInterval = 20;
+
+        staticDecoy.gameObject.SetActive(networkObject.IsOwner || NetworkManager.Instance.IsServer);
+        decoy.gameObject.SetActive(!networkObject.IsOwner);
+
         if (networkObject.IsOwner) {
             ShuffleStaticDecoy();
             networkObject.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
-            decoy.gameObject.SetActive(false);
         }
     }
 
