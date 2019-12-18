@@ -27,7 +27,6 @@ public class NetworkHand : HandBehavior {
         if (networkObject.IsOwner) {
             ShuffleStaticDecoy();
             networkObject.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
-            Debug.Log(networkObject.color);
         }
     }
 
