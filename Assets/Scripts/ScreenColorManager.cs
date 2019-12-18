@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BeardedManStudios.Forge.Networking.Unity;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenColorManager : MonoBehaviour {
@@ -12,6 +13,12 @@ public class ScreenColorManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (NetworkManager.Instance.IsServer) {
+            fullscreenImage.enabled = false;
+            smallImage.enabled = false;
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.D))
             fullscreenImage.enabled = !fullscreenImage.enabled;
     }

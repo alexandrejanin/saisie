@@ -3,7 +3,9 @@ using BeardedManStudios.Forge.Networking.Generated;
 using UnityEngine;
 
 public class NetworkHand : HandBehavior {
-    [SerializeField] private Decoy decoy;
+    [SerializeField] private Vector3 sphereCenter = new Vector3(0, 0, 0.3f);
+    [SerializeField] private float sphereRadius = 0.2f;
+    [SerializeField] private Decoy decoy, staticDecoy;
     [SerializeField] private Color errorColor, offColor, onColor;
 
     private HandPositionManager handPositionManager;
@@ -18,6 +20,7 @@ public class NetworkHand : HandBehavior {
         base.NetworkStart();
         networkObject.UpdateInterval = 20;
         if (networkObject.IsOwner) {
+            ShuffleStaticDecoy();
             networkObject.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             decoy.gameObject.SetActive(false);
         }
@@ -27,30 +30,41 @@ public class NetworkHand : HandBehavior {
         if (!networkObject.NetworkReady)
             return;
 
-        decoy.Color = networkObject.color;
+        if (networkObject.IsOwner) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                ShuffleStaticDecoy();
+            }
 
-        if (!networkObject.IsOwner) {
+            var index = handPositionManager.Index;
+
+            networkObject.active = index != null;
+
+            if (index) {
+                transform.position = index.position;
+                networkObject.position = index.position;
+
+                var maxColorValue = FindObjectsOfType<Decoy>()
+                    .Select(d => d.GetLerpValue(index.position))
+                    .Max();
+
+                screenColorManager.Color = Color.Lerp(offColor, onColor, maxColorValue);
+            } else {
+                screenColorManager.Color = errorColor;
+            }
+        } else {
             transform.position = networkObject.position;
             decoy.gameObject.SetActive(networkObject.active);
-            return;
         }
 
-        var index = handPositionManager.Index;
+        staticDecoy.transform.position = networkObject.staticDecoyPosition;
+        float h, s, v;
+        Color.RGBToHSV(networkObject.color, out h, out s, out v);
+        staticDecoy.Color = Color.HSVToRGB(h, s, v / 2);
 
-        networkObject.active = index != null;
+        decoy.Color = networkObject.color;
+    }
 
-        if (!index) {
-            screenColorManager.Color = errorColor;
-            return;
-        }
-
-        transform.position = index.position;
-        networkObject.position = index.position;
-
-        var maxColorValue = FindObjectsOfType<Decoy>()
-            .Select(d => d.GetLerpValue(index.position))
-            .Max();
-
-        screenColorManager.Color = Color.Lerp(offColor, onColor, maxColorValue);
+    private void ShuffleStaticDecoy() {
+        networkObject.staticDecoyPosition = sphereCenter + sphereRadius * Random.insideUnitSphere;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedInterpol("{\"inter\":[0,0.25,0]")]
+	[GeneratedInterpol("{\"inter\":[0,0,0.25,0]")]
 	public partial class HandNetworkObject : NetworkObject
 	{
 		public const int IDENTITY = 2;
@@ -15,6 +15,37 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		#pragma warning disable 0067
 		public event FieldChangedEvent fieldAltered;
 		#pragma warning restore 0067
+		[ForgeGeneratedField]
+		private Vector3 _staticDecoyPosition;
+		public event FieldEvent<Vector3> staticDecoyPositionChanged;
+		public InterpolateVector3 staticDecoyPositionInterpolation = new InterpolateVector3() { LerpT = 0f, Enabled = false };
+		public Vector3 staticDecoyPosition
+		{
+			get { return _staticDecoyPosition; }
+			set
+			{
+				// Don't do anything if the value is the same
+				if (_staticDecoyPosition == value)
+					return;
+
+				// Mark the field as dirty for the network to transmit
+				_dirtyFields[0] |= 0x1;
+				_staticDecoyPosition = value;
+				hasDirtyFields = true;
+			}
+		}
+
+		public void SetstaticDecoyPositionDirty()
+		{
+			_dirtyFields[0] |= 0x1;
+			hasDirtyFields = true;
+		}
+
+		private void RunChange_staticDecoyPosition(ulong timestep)
+		{
+			if (staticDecoyPositionChanged != null) staticDecoyPositionChanged(_staticDecoyPosition, timestep);
+			if (fieldAltered != null) fieldAltered("staticDecoyPosition", _staticDecoyPosition, timestep);
+		}
 		[ForgeGeneratedField]
 		private bool _active;
 		public event FieldEvent<bool> activeChanged;
@@ -29,7 +60,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					return;
 
 				// Mark the field as dirty for the network to transmit
-				_dirtyFields[0] |= 0x1;
+				_dirtyFields[0] |= 0x2;
 				_active = value;
 				hasDirtyFields = true;
 			}
@@ -37,7 +68,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		public void SetactiveDirty()
 		{
-			_dirtyFields[0] |= 0x1;
+			_dirtyFields[0] |= 0x2;
 			hasDirtyFields = true;
 		}
 
@@ -60,7 +91,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					return;
 
 				// Mark the field as dirty for the network to transmit
-				_dirtyFields[0] |= 0x2;
+				_dirtyFields[0] |= 0x4;
 				_position = value;
 				hasDirtyFields = true;
 			}
@@ -68,7 +99,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		public void SetpositionDirty()
 		{
-			_dirtyFields[0] |= 0x2;
+			_dirtyFields[0] |= 0x4;
 			hasDirtyFields = true;
 		}
 
@@ -91,7 +122,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					return;
 
 				// Mark the field as dirty for the network to transmit
-				_dirtyFields[0] |= 0x4;
+				_dirtyFields[0] |= 0x8;
 				_color = value;
 				hasDirtyFields = true;
 			}
@@ -99,7 +130,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		public void SetcolorDirty()
 		{
-			_dirtyFields[0] |= 0x4;
+			_dirtyFields[0] |= 0x8;
 			hasDirtyFields = true;
 		}
 
@@ -117,6 +148,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 		
 		public void SnapInterpolations()
 		{
+			staticDecoyPositionInterpolation.current = staticDecoyPositionInterpolation.target;
 			activeInterpolation.current = activeInterpolation.target;
 			positionInterpolation.current = positionInterpolation.target;
 			colorInterpolation.current = colorInterpolation.target;
@@ -126,6 +158,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		protected override BMSByte WritePayload(BMSByte data)
 		{
+			UnityObjectMapper.Instance.MapBytes(data, _staticDecoyPosition);
 			UnityObjectMapper.Instance.MapBytes(data, _active);
 			UnityObjectMapper.Instance.MapBytes(data, _position);
 			UnityObjectMapper.Instance.MapBytes(data, _color);
@@ -135,6 +168,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		protected override void ReadPayload(BMSByte payload, ulong timestep)
 		{
+			_staticDecoyPosition = UnityObjectMapper.Instance.Map<Vector3>(payload);
+			staticDecoyPositionInterpolation.current = _staticDecoyPosition;
+			staticDecoyPositionInterpolation.target = _staticDecoyPosition;
+			RunChange_staticDecoyPosition(timestep);
 			_active = UnityObjectMapper.Instance.Map<bool>(payload);
 			activeInterpolation.current = _active;
 			activeInterpolation.target = _active;
@@ -155,10 +192,12 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			dirtyFieldsData.Append(_dirtyFields);
 
 			if ((0x1 & _dirtyFields[0]) != 0)
-				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _active);
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _staticDecoyPosition);
 			if ((0x2 & _dirtyFields[0]) != 0)
-				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _position);
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _active);
 			if ((0x4 & _dirtyFields[0]) != 0)
+				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _position);
+			if ((0x8 & _dirtyFields[0]) != 0)
 				UnityObjectMapper.Instance.MapBytes(dirtyFieldsData, _color);
 
 			// Reset all the dirty fields
@@ -178,6 +217,19 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 			if ((0x1 & readDirtyFlags[0]) != 0)
 			{
+				if (staticDecoyPositionInterpolation.Enabled)
+				{
+					staticDecoyPositionInterpolation.target = UnityObjectMapper.Instance.Map<Vector3>(data);
+					staticDecoyPositionInterpolation.Timestep = timestep;
+				}
+				else
+				{
+					_staticDecoyPosition = UnityObjectMapper.Instance.Map<Vector3>(data);
+					RunChange_staticDecoyPosition(timestep);
+				}
+			}
+			if ((0x2 & readDirtyFlags[0]) != 0)
+			{
 				if (activeInterpolation.Enabled)
 				{
 					activeInterpolation.target = UnityObjectMapper.Instance.Map<bool>(data);
@@ -189,7 +241,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					RunChange_active(timestep);
 				}
 			}
-			if ((0x2 & readDirtyFlags[0]) != 0)
+			if ((0x4 & readDirtyFlags[0]) != 0)
 			{
 				if (positionInterpolation.Enabled)
 				{
@@ -202,7 +254,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 					RunChange_position(timestep);
 				}
 			}
-			if ((0x4 & readDirtyFlags[0]) != 0)
+			if ((0x8 & readDirtyFlags[0]) != 0)
 			{
 				if (colorInterpolation.Enabled)
 				{
@@ -222,6 +274,11 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if (IsOwner)
 				return;
 
+			if (staticDecoyPositionInterpolation.Enabled && !staticDecoyPositionInterpolation.current.UnityNear(staticDecoyPositionInterpolation.target, 0.0015f))
+			{
+				_staticDecoyPosition = (Vector3)staticDecoyPositionInterpolation.Interpolate();
+				//RunChange_staticDecoyPosition(staticDecoyPositionInterpolation.Timestep);
+			}
 			if (activeInterpolation.Enabled && !activeInterpolation.current.UnityNear(activeInterpolation.target, 0.0015f))
 			{
 				_active = (bool)activeInterpolation.Interpolate();
